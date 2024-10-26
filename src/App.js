@@ -14,7 +14,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert(datas);
+    alert({ datas: datas.email });
   }
   return (
     <div className="container">
@@ -32,7 +32,6 @@ function App() {
               name="email"
               value={datas.email || ""}
               onChange={handleOnChange}
-           
             />
           </label>{" "}
           <br /> <br />
