@@ -1,37 +1,32 @@
 import { useState } from "react";
 import "./App.css";
-import { QRCodeCanvas } from "qrcode.react";
+// import { QRCodeCanvas } from "qrcode.react";
 const intialValue = {
   email: "",
   subject: "",
   message: "",
 };
 
-
-// const curl = curl -X 'GET' \
-// 'https://qrapi.io/v2/qrcode/email?address=muritador5050%40gmail.com&size=m&quite_zone=8&error_correction=M&data_pattern=RECT&eye_pattern=RECT_RECT&data_gradient_style=None&data_gradient_start_color=%23000000&data_gradient_end_color=%23000000&eye_color_inner=%23000000&eye_color_outer=%23000000&background_color=%23FFFFFF&logo.size=15&logo.excavated=true&logo.angle=0&logo.cache=true&poster.left=50&poster.top=50&poster.size=40&poster.eyeshape=ROUND_RECT&poster.dataPattern=ROUND&format=png' \
-// -H 'accept: image/png'
 // const api = "idfddonmhydqvdvsljbnegfzmbnwkhjjzwraqaaq"
 function App() {
-  const [mail, setMail] = useState();
+  const [qrimage, setQrimage] = useState();
   const [datas, setDatas] = useState(intialValue);
+
   function handleOnChange(e) {
     setDatas({ ...datas, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  const options = {
+    url: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${datas.email}&color=ff0000&ecc=H`,
+  };
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(datas);
-  }
-
-  async function fetching() {
-    const res = await fetch(
-      "https://qrapi.io/v2/qrcode"
+    const response = await fetch(
+      `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${datas.email}&color=ff0000`
     );
-    const dat = await res.blob();
-    console.log(dat);
+    const result = await response.blob();
+    setQrimage(result);
   }
- fetching()
 
   return (
     <div className="container">
@@ -76,12 +71,22 @@ function App() {
           <br />
           <br />
           <button type="submit" className="submit">
-           <img src="https://qrapi.s3.us-east-2.amazonaws.com/Media/email_2_1729956460420.png" alt="mail" className="mail-img"/>  GENERATE QR CODE
+            <img
+              src="https://qrapi.s3.us-east-2.amazonaws.com/Media/email_2_1729956460420.png"
+              alt="mail"
+              className="mail-img"
+            />{" "}
+            GENERATE QR CODE
           </button>
         </form>
         <div className="qrcode">
           <h4>Scan Me</h4>
-          <QRCodeCanvas value={` ${datas}`} size={200} minVersion={3} />
+          {/* <QRCodeCanvas value={` ${datas}`} size={200} minVersion={3} /> */}
+          {qrimage && <img src={options.url} alt="qrcode" />}
+          {/* <img
+            src=" https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=muritador5050@gmail.com"
+            alt="qr"
+          /> */}
         </div>
       </div>
     </div>
