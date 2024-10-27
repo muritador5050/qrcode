@@ -17,15 +17,11 @@ function App() {
     setDatas({ ...datas, [e.target.name]: e.target.value });
   }
 
-  
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${datas.email}&color=00ff00`,
-        {
-          method: "POST",
-        }
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x150&data=${datas.email}&color=${datas.subject}`
       );
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
@@ -55,14 +51,23 @@ function App() {
           </label>{" "}
           <br /> <br />
           <label>
-            <h3>Subject:</h3>
-            <input
+            Select a Color for your Qr code
+            <select name="color">
+              <option value="" >Black</option>
+              <option value="" >yellow</option>
+              <option value="" >Blue</option>
+              <option value="" >Green</option>
+              <option value="" >Purple</option>
+              <option value="" >Red</option>
+              <option value="" >olive</option>
+            </select>
+            {/* <input
               placeholder="Enter Email Subject"
               type="text"
               name="subject"
               value={datas.subject || ""}
               onChange={handleOnChange}
-            />
+            /> */}
           </label>{" "}
           <br />
           <br />
@@ -87,12 +92,14 @@ function App() {
           </button>
         </form>
         <div className="qrcode">
-          <h4>Scan Me</h4>
           {/* <QRCodeCanvas value={` ${datas}`} size={200} minVersion={3} /> */}
           {qrimage ? (
-            <img src={qrimage} alt="Guido Van Rossum" />
+            <small>
+              <img src={qrimage} alt="Guido Van Rossum" /> <br />
+              <h4>Scan Me</h4>
+            </small>
           ) : (
-            "loading..."
+            "Display Qr code here"
           )}
         </div>
       </div>
