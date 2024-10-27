@@ -4,7 +4,7 @@ import { QRCodeCanvas } from "qrcode.react";
 // import { QRCodeCanvas } from "qrcode.react";
 const intialValue = {
   email: "",
-  subject: "",
+  color: "",
   message: "",
 };
 
@@ -21,7 +21,7 @@ function App() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://api.qrserver.com/v1/create-qr-code/?size=200x150&data=${datas.email}&color=${datas.subject}`
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x150&data=${datas.email}&color=${datas.color}`
       );
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
@@ -52,14 +52,18 @@ function App() {
           <br /> <br />
           <label>
             Select a Color for your Qr code
-            <select name="color">
-              <option value="" >Black</option>
-              <option value="" >yellow</option>
-              <option value="" >Blue</option>
-              <option value="" >Green</option>
-              <option value="" >Purple</option>
-              <option value="" >Red</option>
-              <option value="" >olive</option>
+            <select
+              name="color"
+              value={datas.color || ""}
+              onChange={handleOnChange}
+            >
+              <option value="000000">Black</option>
+              <option value="FFFF00">yellow</option>
+              <option value="0000FF">Blue</option>
+              <option value="008000">Green</option>
+              <option value="800080">Purple</option>
+              <option value="FF0000">Red</option>
+              <option value="00FFFF">Aqua</option>
             </select>
             {/* <input
               placeholder="Enter Email Subject"
