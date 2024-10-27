@@ -38,7 +38,8 @@ label > h3 {
 }
 
 label input,
-label textarea {
+label textarea,
+select {
   width: 500px;
   height: 50px;
   border-radius: 5px;
@@ -58,11 +59,6 @@ textarea {
   max-height: 100px;
 }
 
-.mail-img {
-  width: 25px;
-  height: 25px;
-}
-
 .submit {
   width: 250px;
   height: 40px;
@@ -71,6 +67,7 @@ textarea {
   border: none;
   outline: none;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .qrcode {
@@ -80,5 +77,4 @@ textarea {
   gap: 10px;
   text-align: center;
   border: 2px solid yellow;
-  
 }

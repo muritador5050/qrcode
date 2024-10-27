@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import { QRCodeCanvas } from "qrcode.react";
 // import { QRCodeCanvas } from "qrcode.react";
@@ -12,16 +12,21 @@ const intialValue = {
 function App() {
   const [qrimage, setQrimage] = useState();
   const [datas, setDatas] = useState(intialValue);
+  const inputRef = useRef(null);
 
   function handleOnChange(e) {
     setDatas({ ...datas, [e.target.name]: e.target.value });
   }
 
+  const handleOnfocus = () => {
+    inputRef.current.value = "";
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://api.qrserver.com/v1/create-qr-code/?size=200x150&data=${datas.email}&color=${datas.color}`
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x150&data=${datas.email}&color=${datas.color}&qzone=5&ecc=Q`
       );
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
@@ -47,11 +52,13 @@ function App() {
               name="email"
               value={datas.email || ""}
               onChange={handleOnChange}
+              ref={inputRef}
+              onFocus={handleOnfocus}
             />
           </label>{" "}
           <br /> <br />
           <label>
-            Select a Color for your Qr code
+            <h3>Select a Color for your Qr code</h3>
             <select
               name="color"
               value={datas.color || ""}
@@ -65,13 +72,6 @@ function App() {
               <option value="FF0000">Red</option>
               <option value="00FFFF">Aqua</option>
             </select>
-            {/* <input
-              placeholder="Enter Email Subject"
-              type="text"
-              name="subject"
-              value={datas.subject || ""}
-              onChange={handleOnChange}
-            /> */}
           </label>{" "}
           <br />
           <br />
@@ -87,11 +87,6 @@ function App() {
           <br />
           <br />
           <button type="submit" className="submit" onClick={handleSubmit}>
-            <img
-              src="https://qrapi.s3.us-east-2.amazonaws.com/Media/email_2_1729956460420.png"
-              alt="mail"
-              className="mail-img"
-            />{" "}
             GENERATE QR CODE
           </button>
         </form>
