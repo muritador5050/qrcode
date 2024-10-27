@@ -1,11 +1,9 @@
 import { useRef, useState } from "react";
+import { BallTriangle } from "react-loader-spinner";
 import "./App.css";
-import { QRCodeCanvas } from "qrcode.react";
-// import { QRCodeCanvas } from "qrcode.react";
 const intialValue = {
-  email: "",
+  data: "",
   color: "",
-  message: "",
 };
 
 // const api = "idfddonmhydqvdvsljbnegfzmbnwkhjjzwraqaaq"
@@ -26,7 +24,7 @@ function App() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://api.qrserver.com/v1/create-qr-code/?size=200x150&data=${datas.email}&color=${datas.color}&qzone=5&ecc=Q`
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${datas.data}&color=${datas.color}&qzone=5&ecc=Q`
       );
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
@@ -42,15 +40,15 @@ function App() {
         <h1>Qr Code Generator</h1>
       </header>
       <div className="App">
-        <form className="email-form">
+        <form className="email-form" onSubmit={handleSubmit}>
           <h3>Email Qr Code</h3>
           <label>
             <h3>Email:</h3>
             <input
-              placeholder="Your Email"
-              type="email"
-              name="email"
-              value={datas.email || ""}
+              placeholder="Enter Url, Email e.t.c"
+              type="text"
+              name="data"
+              value={datas.data || ""}
               onChange={handleOnChange}
               ref={inputRef}
               onFocus={handleOnfocus}
@@ -58,7 +56,7 @@ function App() {
           </label>{" "}
           <br /> <br />
           <label>
-            <h3>Select a Color for your Qr code</h3>
+            <h3>Select a Color for your Qr code:</h3>
             <select
               name="color"
               value={datas.color || ""}
@@ -75,31 +73,20 @@ function App() {
           </label>{" "}
           <br />
           <br />
-          <label>
-            <h3>Message:</h3>
-            <textarea
-              placeholder="Enter Your Message"
-              name="message"
-              value={datas.message || ""}
-              onChange={handleOnChange}
-            />
-          </label>
-          <br />
-          <br />
-          <button type="submit" className="submit" onClick={handleSubmit}>
+          <button type="submit" className="submit">
             GENERATE QR CODE
           </button>
         </form>
         <div className="qrcode">
-          {/* <QRCodeCanvas value={` ${datas}`} size={200} minVersion={3} /> */}
           {qrimage ? (
-            <small>
-              <img src={qrimage} alt="Guido Van Rossum" /> <br />
-              <h4>Scan Me</h4>
-            </small>
+            <div className="scanner">
+              <img src={qrimage} alt="qr code" /> <br /> <br />
+              <h4 className="scan-me">Scan Me</h4>
+            </div>
           ) : (
             "Display Qr code here"
           )}
+         <BallTriangle color="red" visible={true}/>
         </div>
       </div>
     </div>

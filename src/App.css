@@ -38,8 +38,7 @@ label > h3 {
 }
 
 label input,
-label textarea,
-select {
+label select {
   width: 500px;
   height: 50px;
   border-radius: 5px;
@@ -51,12 +50,6 @@ select {
 ::placeholder {
   font-size: 1.3em;
   color: rgb(156, 147, 134);
-}
-
-textarea {
-  resize: vertical;
-  min-height: 70px;
-  max-height: 100px;
 }
 
 .submit {
@@ -76,5 +69,23 @@ textarea {
   justify-content: center;
   gap: 10px;
   text-align: center;
-  border: 2px solid yellow;
+}
+
+.scanner {
+  position: relative;
+  perspective: 240px;
+}
+.scan-me {
+  animation: trans .4s infinite ease-in-out alternate;
+}
+
+@keyframes trans {
+  from {
+    transform: translateZ(-10px);
+    color: blue;
+  }
+  to {
+    transform: translateZ(10px);
+    color: red;
+  }
 }
