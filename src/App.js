@@ -39,7 +39,9 @@ function App() {
       </header>
       <div className="App">
         <form className="email-form" onSubmit={handleSubmit}>
-          <h3>Generator any Type Of Qr Code Data</h3>
+          <h3>
+            GENERATE HERE <small className="entity-arrow-down">&darr;</small>{" "}
+          </h3>
           <label>
             <h3>Data:</h3>
             <input
@@ -77,10 +79,10 @@ function App() {
         </form>
         <div className="qrcode">
           {qrimage ? (
-            <div className="scanner">
+            <frames className="scanner">
               <img src={qrimage} alt="qr code" /> <br /> <br />
               <h4 className="scan-me">Scan Me</h4>
-            </div>
+            </frames>
           ) : (
             "Display Qr code here"
           )}
