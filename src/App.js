@@ -39,9 +39,9 @@ function App() {
       </header>
       <div className="App">
         <form className="email-form" onSubmit={handleSubmit}>
-          <h3>Email Qr Code</h3>
+          <h3>Generator any Type Of Qr Code Data</h3>
           <label>
-            <h3>Email:</h3>
+            <h3>Data:</h3>
             <input
               placeholder="Enter Url, Email e.t.c"
               type="text"
@@ -54,7 +54,7 @@ function App() {
           </label>{" "}
           <br /> <br />
           <label>
-            <h3>Select a Color for your Qr code:</h3>
+            <h3>Color:</h3>
             <select
               name="color"
               value={datas.color || ""}
