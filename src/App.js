@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
-import { BallTriangle } from "react-loader-spinner";
 import "./App.css";
 const intialValue = {
   data: "",
   color: "",
 };
 
-// const api = "idfddonmhydqvdvsljbnegfzmbnwkhjjzwraqaaq"
 function App() {
   const [qrimage, setQrimage] = useState();
   const [datas, setDatas] = useState(intialValue);
@@ -74,7 +72,7 @@ function App() {
           <br />
           <br />
           <button type="submit" className="submit">
-            GENERATE QR CODE
+            GENERATE QR-CODE
           </button>
         </form>
         <div className="qrcode">
@@ -86,7 +84,6 @@ function App() {
           ) : (
             "Display Qr code here"
           )}
-         <BallTriangle color="red" visible={true}/>
         </div>
       </div>
     </div>
