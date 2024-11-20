@@ -1,5 +1,6 @@
 {
   "name": "qrcode-app",
+  "homepage": "https://muritador5050.github.io/qrcode",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -114,3 +114,23 @@ label select {
     transform: translateY(10px);
   }
 }
+
+@media screen and (max-width: 842px) {
+  .container {
+    width: fit-content;
+  }
+  .App {
+    display: inline-block;
+    margin: auto;
+    margin: 1em;
+  }
+  .submit {
+    width: 500px;
+  }
+  .qrcode {
+   scale: 2;
+   margin-top: 10em;
+   /* margin-left: auto;
+   margin-right: auto; */
+  }
+}
