@@ -115,6 +115,7 @@ label select {
   }
 }
 
+ /* media query */
 @media screen and (max-width: 842px) {
   .container {
     width: fit-content;
@@ -128,9 +129,7 @@ label select {
     width: 500px;
   }
   .qrcode {
-   scale: 2;
-   margin-top: 10em;
-   /* margin-left: auto;
-   margin-right: auto; */
+    scale: 2;
+    margin-top: 10em;
   }
 }
