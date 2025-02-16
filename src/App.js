@@ -1,17 +1,14 @@
 import { useRef, useState } from 'react';
 import './App.css';
-const intialValue = {
-  data: '',
-  color: '',
-};
 
 function App() {
-  const [qrimage, setQrimage] = useState();
-  const [datas, setDatas] = useState(intialValue);
+  const [qrimage, setQrimage] = useState(null);
+  const [datas, setDatas] = useState({ data: '', color: '' });
   const inputRef = useRef(null);
 
   function handleOnChange(e) {
     setDatas({ ...datas, [e.target.name]: e.target.value });
+    setQrimage(null);
   }
 
   const handleOnfocus = () => {
@@ -25,7 +22,7 @@ function App() {
     }
     try {
       const response = await fetch(
-        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${datas.data}&color=${datas.color}&qzone=5&ecc=Q`
+        `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${datas.data}&color=${datas.color}&qzone=4&ecc=Q`
       );
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
@@ -38,14 +35,15 @@ function App() {
   return (
     <div className='container'>
       <header>
-        <h1 className='heading-text'>Qr Code Generator</h1>
+        <h1 className='heading-text'>
+          <strong>Qr</strong> Code Generator
+        </h1>
       </header>
       <div className='flex-container'>
         <div className='qrcode'>
           {qrimage ? (
             <div className='scanner'>
               <img src={qrimage} alt='qr code' />
-              <h4 className='scan-me'>Scan Me</h4>
             </div>
           ) : (
             <div className='rotate'>
@@ -66,7 +64,7 @@ function App() {
               ref={inputRef}
               onFocus={handleOnfocus}
             />
-            <label>Enter Url, Email e.t.c</label>
+            <label>Data</label>
           </div>
           <div className='select-group'>
             <select

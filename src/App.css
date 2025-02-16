@@ -5,18 +5,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --bg: #9fa65a;
+  --color: #2963a2;
+}
 body {
-  background-color: rgb(101, 137, 168);
+  background: var(--bg);
   font-size: 1.3rem;
   font-family: 'Roboto', sans-serif;
+  color: var(--color);
 }
 
 img {
   max-width: 100%;
 }
 .container {
-  border: 5px solid blue;
   padding: 1.5em;
+  min-height: fit-content;
 }
 
 .heading-text,
@@ -24,18 +29,22 @@ img {
   font-size: calc(0.6em * 2);
   word-spacing: 5px;
   text-align: center;
-  color: white;
   margin-bottom: 1em;
 }
+strong {
+  font-size: 3rem;
+}
+
 .generate {
+  text-align: center;
   letter-spacing: 5px;
 }
+
 small {
   position: relative;
 }
 .entity-arrow-down {
   position: absolute;
-  color: green;
   font-size: 1.7em;
   margin-left: 0.5em;
   animation: move 1s infinite ease-in-out;
@@ -58,9 +67,9 @@ small {
   transform: translateY(-50%);
   top: 50%;
   left: 15px;
-  color: white;
   font-size: 1rem;
   font-style: oblique;
+  color: var(--color);
   pointer-events: none;
   padding: 0 5px;
   transition: 0.5s;
@@ -68,7 +77,7 @@ small {
 
 .input-group input:focus ~ label {
   top: 0;
-  background-color: rgb(101, 137, 168);
+  background: var(--bg);
 }
 
 input,
@@ -79,17 +88,14 @@ select {
   outline: none;
   padding: 5px;
   background: transparent;
-  border: 1px solid black;
-}
-
-::placeholder {
-  font-size: 1.3em;
-  color: rgb(156, 147, 134);
+  border: 1px solid var(--color);
+  color: var(--color);
 }
 
 .submit {
   width: 100%;
-  background: green;
+  background: var(--color);
+  color: white;
   padding: 10px 5px;
   border: none;
   border-radius: 3px;
@@ -97,10 +103,11 @@ select {
 }
 
 .qrcode {
-  border: 2px groove black;
   min-height: 200px;
 }
-
+.scanner {
+  text-align: center;
+}
 .rotate {
   position: relative;
 }
@@ -112,25 +119,7 @@ select {
   animation: rotate 2s infinite ease-out;
 }
 .scanner {
-  position: relative;
-  perspective: 240px;
   justify-items: center;
-}
-.scan-me {
-  font-style: oblique;
-  font-family: 'Courier New', Courier, monospace;
-  animation: trans 0.4s infinite ease-in-out alternate;
-}
-
-@keyframes trans {
-  from {
-    transform: translateZ(-10px);
-    color: yellow;
-  }
-  to {
-    transform: translateZ(10px);
-    color: blue;
-  }
 }
 
 @keyframes rotate {
@@ -141,10 +130,10 @@ select {
 
 @keyframes move {
   from {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   to {
-    transform: translateY(10px);
+    transform: translateY(5px);
   }
 }
 
@@ -158,5 +147,13 @@ select {
   }
   .qrcode {
     width: 300px;
+  }
+
+  .url-input {
+    width: 45%;
+  }
+  .submit {
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 }
