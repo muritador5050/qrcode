@@ -5,20 +5,30 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: rgb(101, 137, 168);
+  font-size: 1.3rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
 .container {
-  display: inline-block;
-  width: 100%;
-  height: 100vh;
+  border: 5px solid blue;
+  padding: 1.5em;
 }
 
-.App {
-  display: flex;
-  justify-content: space-around;
-}
-
-header h1 {
+.heading-text,
+.no-qr-yet {
+  font-size: calc(0.6em * 2);
+  word-spacing: 5px;
   text-align: center;
-  margin-bottom: 2em;
+  color: white;
+  margin-bottom: 1em;
+}
+.generate {
+  letter-spacing: 5px;
 }
 small {
   position: relative;
@@ -31,32 +41,45 @@ small {
   animation: move 1s infinite ease-in-out;
 }
 
-form > h3 {
-  margin-bottom: 2em;
-  text-align: center;
-}
-
 /*Email-Form */
-.email-form {
-  display: inline-block;
+.url-input {
+  margin-top: 2em;
+}
+.input-group {
+  position: relative;
+  margin-top: 2em;
+}
+.select-group {
+  margin: 1em 0;
 }
 
-label {
-  display: flex;
-  justify-content: space-between;
-}
-label > h3 {
-  margin-right: 2em;
+.input-group label {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 15px;
+  color: white;
+  font-size: 1rem;
+  font-style: oblique;
+  pointer-events: none;
+  padding: 0 5px;
+  transition: 0.5s;
 }
 
-label input,
-label select {
-  width: 500px;
-  height: 50px;
+.input-group input:focus ~ label {
+  top: 0;
+  background-color: rgb(101, 137, 168);
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 50px;
   border-radius: 5px;
   outline: none;
-  border: none;
   padding: 5px;
+  background: transparent;
+  border: 1px solid black;
 }
 
 ::placeholder {
@@ -65,33 +88,37 @@ label select {
 }
 
 .submit {
-  width: 250px;
-  height: 40px;
+  width: 100%;
   background: green;
-  padding: 5px;
+  padding: 10px 5px;
   border: none;
-  outline: none;
   border-radius: 3px;
   cursor: pointer;
-  margin-left: 7em;
 }
 
 .qrcode {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-  margin-top: 3em;
+  border: 2px groove black;
+  min-height: 200px;
 }
 
+.rotate {
+  position: relative;
+}
+.no-qr-yet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 80px;
+  animation: rotate 2s infinite ease-out;
+}
 .scanner {
   position: relative;
   perspective: 240px;
+  justify-items: center;
 }
 .scan-me {
   font-style: oblique;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   animation: trans 0.4s infinite ease-in-out alternate;
 }
 
@@ -102,7 +129,13 @@ label select {
   }
   to {
     transform: translateZ(10px);
-    color: red;
+    color: blue;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotateY(360deg);
   }
 }
 
@@ -115,21 +148,15 @@ label select {
   }
 }
 
- /* media query */
-@media screen and (max-width: 842px) {
-  .container {
-    width: fit-content;
-  }
-  .App {
-    display: inline-block;
-    margin: auto;
-    margin: 1em;
-  }
-  .submit {
-    width: 500px;
+/* media query */
+@media (min-width: 900px) {
+  .flex-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
   }
   .qrcode {
-    scale: 2;
-    margin-top: 10em;
+    width: 300px;
   }
 }
