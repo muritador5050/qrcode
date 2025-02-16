@@ -20,6 +20,9 @@ function App() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (datas.data === '') {
+      alert('please input a URL');
+    }
     try {
       const response = await fetch(
         `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${datas.data}&color=${datas.color}&qzone=5&ecc=Q`
